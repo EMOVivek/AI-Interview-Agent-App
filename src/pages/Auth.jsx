@@ -1,11 +1,17 @@
 import React from 'react'
 import { IoSparkles } from 'react-icons/io5';
 import { RiRobot2Fill } from "react-icons/ri";
-
+import { motion } from "framer-motion"
+import { FcGoogle } from 'react-icons/fc';
 const Auth = () => {
     return (
         <div className='w-full min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20'>
-            <div className='w-full max-w-md p-8 rounded-3xl bg-white shadow-2xl border border-gray-200'>
+
+            <motion.div
+                initial={{ opacity: 0, y: -40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.05 }}
+                className='w-full max-w-md p-8 rounded-3xl bg-white shadow-2xl border border-gray-200'>
                 <div className='flex items-center justify-center gap-3 mb-6'>
                     <div className='bg-black text-white p-2 rounded-lg'>
                         <RiRobot2Fill size={18} />
@@ -20,8 +26,19 @@ const Auth = () => {
                         AI Smart Interview
                     </span>
                 </h1>
-            </div>
+                <p className='text-gray-500 text-center text-sm md:text-base leading-relaxed mb-8'>
+                    Sign in to start AI-powered mock interviews,
+                    track your progress, and unlock detailed performance insights.
+                </p>
+                <motion.button
+                    whileHover={{ opacity: 0.9, scale: 1.03 }}
+                    whileTap={{ opacity: 1, scale: 0.93 }}
+                    className='w-full flex items-center justify-center gap-3 py-3 bg-black text-white rounded-full shadow-md'>
+                    <FcGoogle size={20} />
+                    Continue with Google
 
+                </motion.button>
+            </motion.div>
         </div>
     )
 }
