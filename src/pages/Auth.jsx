@@ -4,13 +4,18 @@ import { RiRobot2Fill } from "react-icons/ri";
 import { motion } from "framer-motion"
 import { FcGoogle } from 'react-icons/fc';
 import { auth, provider } from '../utils/firebase';
+import axios from 'axios';
+import { ServerUrl } from '../App';
 
 const Auth = () => {
 
     const handleGoogleAuth = async () => {
         try {
             const response = await signInWithPopup(auth, provider);
-            console.log('response ->', response)
+            let user = response.user;
+            let name = user.displayName;
+            let result = await axios.post(ServerUrl + "google/auth", { name, email }, { withCredentials: true });
+
         } catch (error) {
             console.error(error);
         }

@@ -3,11 +3,13 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Auth from './pages/Auth'
 
+export const ServerUrl = "http://localhost:4000/api/io-ai/v1";
+
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home/>}/>
-            <Route path='/auth' element={<Auth/>}/>
+      <Route path='/' element={<Home />} />
+      <Route path='/auth' element={<Auth />} />
 
     </Routes>
   )
