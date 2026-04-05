@@ -3,7 +3,19 @@ import { IoSparkles } from 'react-icons/io5';
 import { RiRobot2Fill } from "react-icons/ri";
 import { motion } from "framer-motion"
 import { FcGoogle } from 'react-icons/fc';
+import { auth, provider } from '../utils/firebase';
+
 const Auth = () => {
+
+    const handleGoogleAuth = async () => {
+        try {
+            const response = await signInWithPopup(auth, provider);
+            console.log('response ->', response)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className='w-full min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20'>
 
@@ -31,6 +43,7 @@ const Auth = () => {
                     track your progress, and unlock detailed performance insights.
                 </p>
                 <motion.button
+                    onClick={handleGoogleAuth}
                     whileHover={{ opacity: 0.9, scale: 1.03 }}
                     whileTap={{ opacity: 1, scale: 0.93 }}
                     className='w-full flex items-center justify-center gap-3 py-3 bg-black text-white rounded-full shadow-md'>
