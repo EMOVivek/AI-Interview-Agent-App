@@ -3,24 +3,28 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Auth from './pages/Auth'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUserData } from './redux/userSlice';
 
 export const ServerUrl = "http://localhost:4000/api/io-ai/v1";
 
 const App = () => {
+  const dispatch = useDispatch()
   useEffect(() => {
     const getUser = async () => {
       try {
         const result = await axios.get(ServerUrl + "/current-user",
           { withCredentials: true }
         );
-        console.log('result -> ', result);
+        dispatch(setUserData(result.data))
       } catch (error) {
         console.error(error);
+        dispatch(setUserData(null))
 
       }
     }
     getUser()
-  },[]);
+  }, [dispatch]);
 
   return (
     <Routes>
