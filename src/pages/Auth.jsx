@@ -8,7 +8,7 @@ import axios from 'axios';
 import { ServerUrl } from '../App';
 import { signInWithPopup } from "firebase/auth";
 
-const Auth = () => {
+const Auth = ({ isModel = false }) => {
 
     const handleGoogleAuth = async () => {
         try {
