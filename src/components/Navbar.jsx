@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setUserData } from '../redux/userSlice'
 import AuthModel from './AuthModel'
+import { ServerUrl } from '../App'
 
 const Navbar = () => {
 
@@ -17,11 +18,12 @@ const Navbar = () => {
     const [showUserPopup, setShowUserPopup] = useState(false)
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [showAuth, ssetShowAuth] = useState(false);
+    const [showAuth, setShowAuth] = useState(false);
 
     const handleLogout = async () => {
+        console.log('first')
         try {
-            await axios.get(ServerUrl + "/api/auth/logout", { withCredentials: true })
+            await axios.post(ServerUrl + "/logout", { withCredentials: true })
             dispatch(setUserData(null))
             setShowCreditPopup(false)
             setShowUserPopup(false)
@@ -50,6 +52,10 @@ const Navbar = () => {
                 <div className='flex items-center gap-6 relative'>
                     <div className='relative'>
                         <button onClick={() => {
+                            if (!userData) {
+                                setShowAuth(true)
+                                return;
+                            }
                             setShowCreditPopup(!showCreditPopup)
                             setShowUserPopup(false)
                         }}
@@ -71,7 +77,14 @@ const Navbar = () => {
                     </div>
 
                     <div className='relative'>
-                        <button onClick={() => setShowUserPopup(!showUserPopup)}
+                        <button onClick={() => {
+                            if (!userData) {
+                                setShowAuth(true)
+                                return;
+                            }
+                            setShowUserPopup(!showUserPopup)
+                        }
+                        }
                             className='w-9 h-9 bg-black text-white rounded-full flex items-center justify-center
                         font-semibold'>
                             {userData ? userData?.name.slice(0, 1).toUpperCase()
@@ -95,7 +108,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </motion.div>
-            {showAuth && <AuthModel onClose={() => setShowAuth()} />}
+            {showAuth && <AuthModel onClose={() => setShowAuth(false)} />}
         </div >
     )
 }
