@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { motion } from 'motion/react'
-import { div } from 'motion/react-client'
 import React, { useState } from 'react'
 import { BsCoin, BsRobot } from 'react-icons/bs'
 import { FaUserAstronaut } from 'react-icons/fa'
