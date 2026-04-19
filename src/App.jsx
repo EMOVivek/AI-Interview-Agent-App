@@ -5,7 +5,7 @@ import Auth from './pages/Auth'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUserData } from './redux/userSlice';
-import Step1SetUp from './components/Step1SetUp';
+import Step1SetUp from './components/Step1Setup';
 
 export const ServerUrl = "http://localhost:4000/api/io-ai/v1";
 
